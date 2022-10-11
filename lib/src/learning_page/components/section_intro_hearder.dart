@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 class SectionIntroHearder extends StatelessWidget {
@@ -32,8 +30,8 @@ class SectionIntroHearder extends StatelessWidget {
                 alignment: Alignment.center,
                 width: size.width * .65,
                 child: const Text(
-                  'Chapter 1 good soil and oil blah hapter 1 good soil and   ',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  '၁။ အခြေခံမြေဆီလွှာ နှင့် ကောင်းမွန်သောမြေဆီလွှာ အကြောင်း',
+                  style: TextStyle(fontSize: 15, color: Colors.white),
                 ),
               ),
             ],

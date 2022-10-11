@@ -1,13 +1,11 @@
 import 'dart:developer';
-import 'dart:ui';
 
-import 'package:animated_widgets/generated/i18n.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:learning/src/components/video_list.dart';
 import 'package:learning/src/learning_page/learning_paeg0.dart';
 import 'package:learning/src/learning_page/learning_page1.dart';
 import 'package:learning/src/main_map/main_map1_widget/mm1_chapter1_dialog.dart';
-import 'package:learning/src/main_map/main_map1_widget/mm1_chapter1_title_widget.dart';
 import 'package:learning/src/main_map/main_map2.dart';
 import 'package:learning/src/main_map/main_map3.dart';
 import 'package:learning/tool_widgets.dart';
@@ -798,7 +796,13 @@ class _MainMapFirstScreenState extends State<MainMapFirstScreen> {
               child: BouncingWidget(
                 duration: const Duration(milliseconds: 400),
                 scaleFactor: 1.5,
-                onPressed: () async {},
+                onPressed: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const VideoListByModuleScreen()));
+                },
                 child: Image.asset(
                   "assets/images/ic_media.png",
                   width: 56,

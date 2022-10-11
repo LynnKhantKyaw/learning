@@ -6,14 +6,15 @@ import 'package:learning/src/learning_page/components/section_intro_hearder.dart
 import 'package:learning/src/learning_page/components/title_container.dart';
 import 'package:learning/src/learning_page/components/reference_page.dart';
 
-class LearningPage0 extends StatefulWidget {
-  const LearningPage0({super.key});
+class VideoListByModuleScreen extends StatefulWidget {
+  const VideoListByModuleScreen({super.key});
 
   @override
-  State<LearningPage0> createState() => _LearningPage0State();
+  State<VideoListByModuleScreen> createState() =>
+      _VideoListByModuleScreenState();
 }
 
-class _LearningPage0State extends State<LearningPage0> {
+class _VideoListByModuleScreenState extends State<VideoListByModuleScreen> {
   int isSelected = 0;
 
   String str =
@@ -47,7 +48,7 @@ class _LearningPage0State extends State<LearningPage0> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     width: double.infinity,
-                    height: 50,
+                    height: 60,
                     child: Row(
                       children: [
                         TitleContianer(
@@ -56,11 +57,9 @@ class _LearningPage0State extends State<LearningPage0> {
                               isSelected = 0;
                             });
                           },
-                          title: 'Introduction',
-                          fontSize: 16,
-                          bgColor: isSelected == 0
-                              ? Colors.amber.withOpacity(0.4)
-                              : Colors.grey,
+                          title: 'စိုက်ပျိုးဂေဟစနစ်ဆိုင်ရာ အလေ့အထမျာ',
+                          fontSize: 15,
+                          bgColor: isSelected == 0 ? Colors.white : Colors.grey,
                         ),
                         const SizedBox(width: 10),
                         TitleContianer(
@@ -69,11 +68,10 @@ class _LearningPage0State extends State<LearningPage0> {
                               isSelected = 1;
                             });
                           },
-                          title: 'User Progress',
-                          fontSize: 16,
-                          bgColor: isSelected == 1
-                              ? Colors.amber.withOpacity(0.4)
-                              : Colors.grey,
+                          title:
+                              'Organizing and Strengthening \nFarmer Organization',
+                          fontSize: 15,
+                          bgColor: isSelected == 1 ? Colors.white : Colors.grey,
                         ),
                         const SizedBox(width: 10),
                         TitleContianer(
@@ -82,11 +80,9 @@ class _LearningPage0State extends State<LearningPage0> {
                               isSelected = 2;
                             });
                           },
-                          title: 'အညွှန်းကိုးကားချက်များ',
-                          fontSize: 16,
-                          bgColor: isSelected == 2
-                              ? Colors.amber.withOpacity(0.4)
-                              : Colors.grey,
+                          title: 'Sustainable Natural Rubber',
+                          fontSize: 15,
+                          bgColor: isSelected == 2 ? Colors.white : Colors.grey,
                         ),
                       ],
                     ),
