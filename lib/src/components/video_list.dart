@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:learning/src/components/video_items.dart';
 import 'package:learning/src/learning_page/components/background_page.dart';
-import 'package:learning/src/learning_page/components/introduction_page.dart';
-import 'package:learning/src/learning_page/components/user_progress_page.dart';
 import 'package:learning/src/learning_page/components/section_intro_hearder.dart';
 import 'package:learning/src/learning_page/components/title_container.dart';
-import 'package:learning/src/learning_page/components/reference_page.dart';
 
 class VideoListByModuleScreen extends StatefulWidget {
   const VideoListByModuleScreen({super.key});
@@ -89,22 +87,27 @@ class _VideoListByModuleScreenState extends State<VideoListByModuleScreen> {
                   ),
                   Expanded(
                     child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/images/papersmall.png',
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/papersmall.png',
+                            ),
+                            fit: BoxFit.fill,
                           ),
-                          fit: BoxFit.fill,
                         ),
-                      ),
-                      child: isSelected == 0
-                          ? const IntroductionPage()
-                          : isSelected == 1
-                              ? const UserProgress()
-                              : ReferencePage(str: str),
-                    ),
+                        child: isSelected == 0
+                            ? VideoItemsPage(
+                                index1: 0,
+                              )
+                            : isSelected == 1
+                                ? VideoItemsPage(
+                                    index1: 1,
+                                  )
+                                : VideoItemsPage(
+                                    index1: 2,
+                                  )),
                   ),
                 ],
               ),
