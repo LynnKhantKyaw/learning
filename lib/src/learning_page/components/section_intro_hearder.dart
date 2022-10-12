@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SectionIntroHearder extends StatelessWidget {
-  const SectionIntroHearder({super.key});
+  String title;
+  SectionIntroHearder({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,9 @@ class SectionIntroHearder extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 width: size.width * .65,
-                child: const Text(
-                  '၁။ အခြေခံမြေဆီလွှာ နှင့် ကောင်းမွန်သောမြေဆီလွှာ အကြောင်း',
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+                child: Text(
+                  title,
+                  style: const TextStyle(fontSize: 15, color: Colors.white),
                 ),
               ),
             ],

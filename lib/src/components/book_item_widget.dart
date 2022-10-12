@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class VideoItemWidget extends StatelessWidget {
-  const VideoItemWidget({
+class BookItemWidget extends StatelessWidget {
+  const BookItemWidget({
     super.key,
     required this.title,
     required this.index,
@@ -20,22 +20,14 @@ class VideoItemWidget extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 8, right: 10, left: 12),
             width: MediaQuery.of(context).size.width * 0.23,
-            height: 110,
+            height: 120,
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                color: index == "0"
-                    ? Colors.white
-                    : index == "1"
-                        ? const Color.fromARGB(255, 36, 230, 191)
-                        : const Color.fromARGB(255, 243, 230, 118)),
-            child: Center(
-              child: Image.asset(
-                "assets/images/download.png",
-                width: 40,
-              ),
-            ),
+            child: Image.asset(index == "0"
+                ? "assets/images/b1.png"
+                : index == "0"
+                    ? "assets/images/b2.png"
+                    : "assets/images/b3.png"),
           ),
           Container(
             margin: const EdgeInsets.only(top: 8, right: 10, left: 12),

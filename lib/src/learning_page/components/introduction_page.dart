@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:learning/src/learning_page/components/intro_list_widget.dart';
 import 'package:learning/src/learning_page/learning_page1.dart';
@@ -10,7 +8,7 @@ class IntroductionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String str =
-        """Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem IpsumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.""";
+        "မြေဆီလွှာဖြစ်ပေါ်လာပုံ၊ မြေဆီလွှာတွင် ပါဝင်ဖွဲ့စည်းထားသော အရာများ၊ စိုက်ပျိုးရေးကို အဓိကသက်ရောက်မှု ဖြစ်စေသော မြေဆီလွှာ၏ ရုပ်ဂုဏ်သတ္တိနှင့် ဓာတ်ဂုဏ်သတ္တိများ၏ အကြောင်းကို နားလည်စေရန်။မြေဆီလွှာရှိ အဏုဇီဝပိုးမွှားများ၊ သဘာဝမြေဆီမြေနှစ် ကောင်းမွန်သော မြေဆီလွှာတို့၏ အရေးပါသောအခန်းကဏ္ဍများအကြောင်းကို သိရှိစေရန်။";
 
     return Row(
       children: [
@@ -20,15 +18,11 @@ class IntroductionPage extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: ListView(
               shrinkWrap: true,
+              padding: const EdgeInsets.all(20),
               children: [
                 Text(
                   str,
                   textAlign: TextAlign.justify,
-                  style: const TextStyle(color: Colors.black),
-                ),
-                Text(
-                  str,
-                  textAlign: TextAlign.left,
                   style: const TextStyle(color: Colors.black),
                 ),
               ],
@@ -45,7 +39,7 @@ class IntroductionPage extends StatelessWidget {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return IntroListWidget(
-                    title: '1.1 Chapter 1.1',
+                    title: '1.${index + 1}  Chapter 1.${index + 1}',
                     onTap: () {
                       Navigator.pushReplacement(
                           context,
