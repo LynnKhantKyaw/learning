@@ -25,6 +25,8 @@ dependencies:
   better_player: ^0.0.83
   path_provider: ^2.0.11
   bouncing_widget: ^2.0.0
+  http: ^0.13.5
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
