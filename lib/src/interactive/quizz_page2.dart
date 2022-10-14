@@ -50,7 +50,7 @@ class _QuizzPage2State extends ConsumerState<QuizzPage2> {
         body: SafeArea(
           child: Stack(
             children: [
-              const BackgroundPage(),
+              BackgroundPage(backImage: "assets/images/bg1.jpg",),
               const SessionHeader(),
               Align(
                 alignment: Alignment.center,

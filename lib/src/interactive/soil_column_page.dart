@@ -39,7 +39,9 @@ class _SoilColumnPageState extends State<SoilColumnPage> {
         body: SafeArea(
           child: Stack(
             children: [
-              const BackgroundPage(),
+              BackgroundPage(
+                backImage: "assets/images/bg1.jpg",
+              ),
               const SessionHeader(),
               Align(
                 alignment: Alignment.topCenter,

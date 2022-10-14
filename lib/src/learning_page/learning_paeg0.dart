@@ -30,7 +30,9 @@ class _LearningPage0State extends State<LearningPage0> {
         backgroundColor: const Color.fromARGB(255, 225, 255, 147),
         body: Stack(
           children: [
-            const BackgroundPage(),
+            BackgroundPage(
+              backImage: "assets/images/bg1.jpg",
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SectionIntroHearder(

@@ -31,7 +31,9 @@ class _LearningPage4State extends State<LearningPage4> {
         backgroundColor: const Color.fromARGB(255, 225, 255, 147),
         body: Stack(
           children: [
-            const BackgroundPage(),
+            BackgroundPage(
+              backImage: "assets/images/bg1.jpg",
+            ),
             const SessionHeader(),
             Container(
                 height: MediaQuery.of(context).size.height * 0.8,

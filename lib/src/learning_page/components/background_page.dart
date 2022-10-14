@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BackgroundPage extends StatelessWidget {
-  const BackgroundPage({Key? key}) : super(key: key);
+  String backImage;
+  BackgroundPage({Key? key, required this.backImage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +10,7 @@ class BackgroundPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Image.asset(
-        "assets/images/bg1.jpg",
+        backImage,
         fit: BoxFit.fill,
       ),
     );

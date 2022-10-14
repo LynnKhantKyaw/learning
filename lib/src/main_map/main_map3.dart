@@ -1,6 +1,7 @@
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:learning/src/components/book_list.dart';
+import 'package:learning/src/components/menu_list.dart';
 import 'package:learning/src/components/video_list.dart';
 import 'package:learning/src/learning_page/learning_page1.dart';
 import 'package:learning/src/main_map/main_map1.dart';
@@ -299,7 +300,12 @@ class _MainMapThirdScreenState extends State<MainMapThirdScreen> {
                 child: BouncingWidget(
                   duration: const Duration(milliseconds: 400),
                   scaleFactor: 1.5,
-                  onPressed: () async {},
+                  onPressed: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MenuListScreen()));
+                  },
                   child: Image.asset(
                     "assets/images/ic_menu.png",
                     width: 56,

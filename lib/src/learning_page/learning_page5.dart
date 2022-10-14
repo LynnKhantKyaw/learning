@@ -32,7 +32,9 @@ class _LearningPage5State extends State<LearningPage5> {
         backgroundColor: const Color.fromARGB(255, 225, 255, 147),
         body: Stack(
           children: [
-            const BackgroundPage(),
+            BackgroundPage(
+              backImage: "assets/images/bg1.jpg",
+            ),
             const SessionHeader(),
             Container(
               decoration: shadowDecorationWithBorderColor(

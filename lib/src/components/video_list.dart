@@ -15,7 +15,6 @@ class VideoListByModuleScreen extends StatefulWidget {
 class _VideoListByModuleScreenState extends State<VideoListByModuleScreen> {
   int isSelected = 0;
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,7 +29,13 @@ class _VideoListByModuleScreenState extends State<VideoListByModuleScreen> {
         backgroundColor: const Color.fromARGB(255, 225, 255, 147),
         body: Stack(
           children: [
-            const BackgroundPage(),
+            BackgroundPage(
+              backImage: isSelected == 0
+                  ? "assets/images/bg1.jpg"
+                  : isSelected == 1
+                      ? "assets/images/farmer_back.jpg"
+                      : "assets/images/rubber_back.jpg",
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SectionIntroHearder(

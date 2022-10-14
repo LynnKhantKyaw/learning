@@ -56,7 +56,9 @@ class _LearningPage1State extends State<LearningPage1> {
         backgroundColor: const Color.fromARGB(255, 225, 255, 147),
         body: Stack(
           children: [
-            const BackgroundPage(),
+            BackgroundPage(
+              backImage: "assets/images/bg1.jpg",
+            ),
             const SessionHeader(),
             Align(
               alignment: Alignment.topCenter,

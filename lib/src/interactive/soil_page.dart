@@ -63,7 +63,9 @@ class _SoilPageScreenState extends State<SoilPageScreen> {
             },
             child: Stack(
               children: [
-                const BackgroundPage(),
+                BackgroundPage(
+                  backImage: "assets/images/bg1.jpg",
+                ),
                 const SessionHeader(),
                 Row(
                   children: [
