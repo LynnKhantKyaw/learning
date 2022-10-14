@@ -8,6 +8,7 @@ import 'package:learning/src/main_map/main_map1.dart';
 import 'package:learning/src/main_map/main_map3.dart';
 import 'package:learning/tool_widgets.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainMapSecondScreen extends StatefulWidget {
   const MainMapSecondScreen({Key? key}) : super(key: key);
@@ -18,6 +19,22 @@ class MainMapSecondScreen extends StatefulWidget {
 
 class _MainMapSecondScreenState extends State<MainMapSecondScreen> {
   bool folded = true;
+
+  String userName = "";
+
+  @override
+  void initState() {
+    super.initState();
+    initial();
+  }
+
+  initial() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString("name") ?? "-";
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     final mqData = MediaQuery.of(context);
@@ -75,8 +92,8 @@ class _MainMapSecondScreenState extends State<MainMapSecondScreen> {
                               const SizedBox(
                                 height: 4,
                               ),
-                              const Text(
-                                "Phyu Thant",
+                               Text(
+                                userName,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,

@@ -18,7 +18,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     final mqData = MediaQuery.of(context);
     final mqDataNew = mqData.copyWith(
         textScaleFactor:
@@ -30,8 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Image.asset(
               "assets/images/app_back.jpg",
-              width: size.width,
-              height: size.height,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               fit: BoxFit.fill,
             ),
             Row(
@@ -40,23 +39,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        left: size.width * 0.1,
-                        top: size.width * 0.1,
+                        left: MediaQuery.of(context).size.width * 0.1,
+                        top: MediaQuery.of(context).size.width * 0.1,
                       ),
                       child: Stack(
                         children: [
                           Image.asset(
                             "assets/images/wooden_four.png",
-                            width: size.width * 0.45,
-                            height: size.height * 0.75,
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            height: MediaQuery.of(context).size.height * 0.75,
                             fit: BoxFit.fill,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 24),
                             child: Image.asset(
                               "assets/images/paper_medium_leafs.png",
-                              width: size.width * 0.42,
-                              height: size.height * 0.67,
+                              width: MediaQuery.of(context).size.width * 0.42,
+                              height: MediaQuery.of(context).size.height * 0.67,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -65,80 +64,42 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: size.width * 0.65,
+                        left: MediaQuery.of(context).size.width * 0.65,
                         top: 26,
                       ),
                       child: Image.asset(
                         "assets/images/app_logo.png",
-                        width: size.width * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.25,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: size.width * 0.53,
-                        top: size.height * 0.47,
+                        left: MediaQuery.of(context).size.width * 0.53,
+                        top: MediaQuery.of(context).size.height * 0.47,
                       ),
                       child: Image.asset(
                         "assets/images/wooden_small.png",
-                        width: size.width * 0.35,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         height: 100,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: size.width * 0.56,
-                        top: size.height * 0.49,
+                        left: MediaQuery.of(context).size.width * 0.56,
+                        top: MediaQuery.of(context).size.height * 0.49,
                       ),
                       child: Image.asset(
                         "assets/images/papersmall.png",
-                        width: size.width * 0.31,
+                        width: MediaQuery.of(context).size.width * 0.31,
                         height: 86,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: size.width * 0.58,
-                        top: size.height * 0.51,
-                      ),
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            "assets/images/button_green_round.png",
-                            width: size.width * 0.26,
-                            height: 68,
-                            fit: BoxFit.fill,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 32, top: 16),
-                            child: Text(
-                              "Create New Account\nအကောင့်သစ်ဖွင့်မယ်",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                height: 1.2,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: size.width * 0.48,
-                        top: size.height * 0.46,
-                      ),
-                      child: Image.asset(
-                        "assets/images/wooden_ring_2.png",
-                        width: 68,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: size.width * 0.11,
-                        top: size.width * 0.06,
+                        left: MediaQuery.of(context).size.width * 0.58,
+                        top: MediaQuery.of(context).size.height * 0.51,
                       ),
                       child: BouncingWidget(
                         duration: const Duration(milliseconds: 400),
@@ -149,23 +110,61 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Stack(
                           children: [
                             Image.asset(
-                              "assets/images/title_leaf.png",
-                              width: size.width * 0.38,
+                              "assets/images/button_green_round.png",
+                              width: MediaQuery.of(context).size.width * 0.26,
+                              height: 68,
+                              fit: BoxFit.fill,
                             ),
                             const Padding(
-                              padding: EdgeInsets.only(left: 70, top: 24),
+                              padding: EdgeInsets.only(left: 32, top: 16),
                               child: Text(
-                                "Login/လော့ဂ်အင် ဝင်မယ်",
+                                "Create New Account\nအကောင့်သစ်ဖွင့်မယ်",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    height: 1.2,
-                                    fontWeight: FontWeight.bold),
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  height: 1.2,
+                                ),
                               ),
                             ),
                           ],
                         ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.48,
+                        top: MediaQuery.of(context).size.height * 0.46,
+                      ),
+                      child: Image.asset(
+                        "assets/images/wooden_ring_2.png",
+                        width: 68,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.11,
+                        top: MediaQuery.of(context).size.width * 0.06,
+                      ),
+                      child: Stack(
+                        children: [
+                          Image.asset(
+                            "assets/images/title_leaf.png",
+                            width: MediaQuery.of(context).size.width * 0.38,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 70, top: 24),
+                            child: Text(
+                              "Login/လော့ဂ်အင် ဝင်မယ်",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  height: 1.2,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

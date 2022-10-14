@@ -12,6 +12,7 @@ import 'package:learning/src/main_map/main_map2.dart';
 import 'package:learning/src/main_map/main_map3.dart';
 import 'package:learning/tool_widgets.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainMapFirstScreen extends StatefulWidget {
   const MainMapFirstScreen({Key? key}) : super(key: key);
@@ -23,6 +24,21 @@ class MainMapFirstScreen extends StatefulWidget {
 class _MainMapFirstScreenState extends State<MainMapFirstScreen> {
   bool folded = true;
   bool mm1ChapterDialog = false;
+  String userName = "";
+
+  @override
+  void initState() {
+    super.initState();
+    initial();
+  }
+
+  initial() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString("name") ?? "-";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -525,9 +541,9 @@ class _MainMapFirstScreenState extends State<MainMapFirstScreen> {
                             const SizedBox(
                               height: 4,
                             ),
-                            const Text(
-                              "Phyu Thant",
-                              style: TextStyle(
+                            Text(
+                              userName,
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
