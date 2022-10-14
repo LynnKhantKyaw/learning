@@ -308,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
           'device_token': 'test'
         }));
     log(jsonEncode(<String, String>{
-      'phone': name,
+      'username': name,
       'password': password,
       'device_token': 'test'
     }));
