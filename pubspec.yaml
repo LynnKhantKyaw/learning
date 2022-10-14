@@ -29,8 +29,11 @@ dependencies:
   bouncing_widget: ^2.0.0
   http: ^0.13.5
   shared_preferences: ^2.0.15
+  dropdown_button2: ^1.8.5
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   flutter_lints: ^2.0.0
 
 flutter:
