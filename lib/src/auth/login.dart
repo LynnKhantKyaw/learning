@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning/data/response/auth_response.dart';
 import 'package:learning/src/main_map/main_map1.dart';
+import 'package:learning/tool_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           duration: const Duration(milliseconds: 400),
                           scaleFactor: 1.5,
                           onPressed: () async {
-                            login(context, "sithuaung", "123456");
+                            //login(context, "sithuaung", "123456");
                           },
                           child: Stack(
                             children: [
@@ -181,9 +182,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: SizedBox(
                           width: 200,
-                          height: 60,
+                          height: 42,
                           child: TextFormField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             maxLength: 11,
                             style: const TextStyle(
                               height: 1.0,
@@ -191,13 +192,99 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             controller: userNameController,
                             decoration: const InputDecoration(
-                              labelText: "ဖုန်းနံပါတ်",
+                              labelText: "User Name/အသုံးပြုသူအမည်",
                               labelStyle: TextStyle(color: Colors.black),
                               counterText: "",
                             ),
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.16,
+                          top: MediaQuery.of(context).size.width * 0.21,
+                        ),
+                        child: SizedBox(
+                          width: 200,
+                          height: 42,
+                          child: TextFormField(
+                            keyboardType: TextInputType.text,
+                            maxLength: 11,
+                            style: const TextStyle(
+                              height: 1.0,
+                              color: Colors.black,
+                            ),
+                            controller: passwordController,
+                            decoration: const InputDecoration(
+                              labelText: "Password/လျှို့ဝှက်နံပါတ်",
+                              labelStyle: TextStyle(color: Colors.black),
+                              counterText: "",
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.16,
+                          top: MediaQuery.of(context).size.width * 0.28,
+                        ),
+                        child: BouncingWidget(
+                          duration: const Duration(milliseconds: 400),
+                          scaleFactor: 1.5,
+                          onPressed: () async {
+                            login(context, "sithuaung", "123456");
+                          },
+                          child: Stack(
+                            children: [
+                              Image.asset(
+                                "assets/images/button_green_round.png",
+                                width: MediaQuery.of(context).size.width * 0.26,
+                                height: 54,
+                                fit: BoxFit.fill,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 32, top: 16),
+                                child: Text(
+                                  "Login/လော့ဂ်အင် ဝင်မယ်",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    height: 1.2,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.15,
+                          top: MediaQuery.of(context).size.width * 0.28,
+                        ),
+                        child: Container(
+                          decoration: shadowDecorationWithBorderColor(
+                              const Color.fromARGB(200, 113, 101, 45),
+                              const Color.fromARGB(180, 113, 101, 45),
+                              12),
+                          margin: const EdgeInsets.only(top: 60),
+                          width: MediaQuery.of(context).size.width * 0.28,
+                          height: 52,
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 12, top: 8),
+                            child: Text(
+                              "Forgot Password?\nလျှို့ဝှက်နံပါတ် မေ့နေလား?",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                height: 1.2,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ],
