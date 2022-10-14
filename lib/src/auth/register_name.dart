@@ -22,8 +22,10 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
   final confirmPasswordController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
+  final professionalController = TextEditingController();
   String? stateSelected;
   String? categorySelected;
+  bool isTerAndConditionAggress = false;
   //State and Region of Myanmar
   List<String> categoryItems = ["Farmer", "Instructor"];
   List<String> stateItems = [
@@ -63,6 +65,18 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 fit: BoxFit.fill,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Image.asset(
+                    "assets/images/back.png",
+                    width: 36,
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -326,6 +340,34 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
                         height: 1.0,
                         color: Colors.black,
                       ),
+                      controller: professionalController,
+                      decoration: InputDecoration(
+                        labelText: "Professional/အသက်မွေးဝမ်းကျောင်းအလုပ်",
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintStyle:
+                            const TextStyle(fontSize: 15, color: Colors.grey),
+                        contentPadding:
+                            const EdgeInsets.only(left: 20, right: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.text,
+                      style: const TextStyle(
+                        height: 1.0,
+                        color: Colors.black,
+                      ),
                       controller: passwordController,
                       decoration: InputDecoration(
                         labelText: "Password/လျှို့ဝှက်နံပါတ်",
@@ -373,14 +415,46 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: isTerAndConditionAggress,
+                            onChanged: (value) {
+                              setState(() {
+                                isTerAndConditionAggress = value!;
+                              });
+                            },
+                            activeColor: Colors.green,
+                            checkColor: Colors.white,
+                            tristate: false,
+                          ),
+                          const Text(
+                            " I agree to Privacy Policy of 360 ed",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(
-                      height: 20,
+                      height: 8,
                     ),
                     BouncingWidget(
                       duration: const Duration(milliseconds: 400),
                       scaleFactor: 1.5,
                       onPressed: () async {
-                        //register(context, "sithuaung", "123456");
+                        register(
+                            context,
+                            userNameController.text.toString(),
+                            passwordController.text.toString(),
+                            confirmPasswordController.text.toString(),
+                            emailController.text.toString(),
+                            phoneController.text.toString(),
+                            "dob",
+                            stateSelected.toString(),
+                            categorySelected.toString(),
+                            professionalController.text.toString());
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 12),
@@ -407,6 +481,9 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
                           ],
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 8,
                     ),
                   ],
                 ),
