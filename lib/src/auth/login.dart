@@ -16,10 +16,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     final mqData = MediaQuery.of(context);
@@ -173,6 +172,30 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.16,
+                          top: MediaQuery.of(context).size.width * 0.15,
+                        ),
+                        child: SizedBox(
+                          width: 200,
+                          height: 60,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            maxLength: 11,
+                            style: const TextStyle(
+                              height: 1.0,
+                              color: Colors.black,
+                            ),
+                            controller: userNameController,
+                            decoration: const InputDecoration(
+                              labelText: "ဖုန်းနံပါတ်",
+                              labelStyle: TextStyle(color: Colors.black),
+                              counterText: "",
+                            ),
+                          ),
                         ),
                       ),
                     ],
