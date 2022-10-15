@@ -33,7 +33,7 @@ class _LearningPage5State extends State<LearningPage5> {
         body: Stack(
           children: [
             BackgroundPage(
-              backImage: "assets/images/bg1.jpg",
+              backImage: "assets/images/agre_back.jpg",
             ),
             const SessionHeader(),
             Container(

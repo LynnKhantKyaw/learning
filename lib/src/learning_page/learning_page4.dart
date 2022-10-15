@@ -32,7 +32,7 @@ class _LearningPage4State extends State<LearningPage4> {
         body: Stack(
           children: [
             BackgroundPage(
-              backImage: "assets/images/bg1.jpg",
+              backImage: "assets/images/agre_back.jpg",
             ),
             const SessionHeader(),
             Container(

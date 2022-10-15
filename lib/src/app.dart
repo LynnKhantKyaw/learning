@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:learning/src/auth/login.dart';
+import 'package:learning/src/download_test.dart';
 import 'package:learning/src/interactive/soil_page.dart';
 import 'package:learning/src/main_map/main_map1.dart';
 
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
-          initialRoute: LoginScreen.routeName,
+          initialRoute: DownloadTest.routeName,
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(
               settings: routeSettings,
@@ -77,6 +78,8 @@ class MyApp extends StatelessWidget {
                     return const SoilPageScreen();
                   case LoginScreen.routeName:
                     return const LoginScreen();
+                  case DownloadTest.routeName:
+                    return const DownloadTest();
                   case SampleItemListView.routeName:
                   default:
                     return const MainMapFirstScreen();

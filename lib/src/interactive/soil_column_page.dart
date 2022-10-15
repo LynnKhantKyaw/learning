@@ -40,7 +40,7 @@ class _SoilColumnPageState extends State<SoilColumnPage> {
           child: Stack(
             children: [
               BackgroundPage(
-                backImage: "assets/images/bg1.jpg",
+                backImage: "assets/images/agre_back.jpg",
               ),
               const SessionHeader(),
               Align(

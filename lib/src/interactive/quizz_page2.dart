@@ -50,7 +50,9 @@ class _QuizzPage2State extends ConsumerState<QuizzPage2> {
         body: SafeArea(
           child: Stack(
             children: [
-              BackgroundPage(backImage: "assets/images/bg1.jpg",),
+              BackgroundPage(
+                backImage: "assets/images/agre_back.jpg",
+              ),
               const SessionHeader(),
               Align(
                 alignment: Alignment.center,
@@ -82,22 +84,21 @@ class _QuizzPage2State extends ConsumerState<QuizzPage2> {
                           singleSelectedItem: true,
                           controller: MultiSelectController(),
                           itemsDecoration: MultiSelectDecorations(
-                                decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 120, 126, 184),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                disabledDecoration: const BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                selectedDecoration: BoxDecoration(
-                                    color: answerCorrect
-                                        ? Colors.green
-                                        : const Color.fromARGB(
-                                            255, 45, 50, 112),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(12))),
-                              ),
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 120, 126, 184),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                            disabledDecoration: const BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                            selectedDecoration: BoxDecoration(
+                                color: answerCorrect
+                                    ? Colors.green
+                                    : const Color.fromARGB(255, 45, 50, 112),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(12))),
+                          ),
                           maxSelectableCount: 1,
                           items: multiselect,
                           onChange: ((selectedItems, selectedItem) {

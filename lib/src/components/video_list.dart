@@ -31,7 +31,7 @@ class _VideoListByModuleScreenState extends State<VideoListByModuleScreen> {
           children: [
             BackgroundPage(
               backImage: isSelected == 0
-                  ? "assets/images/bg1.jpg"
+                  ? "assets/images/agre_back.jpg"
                   : isSelected == 1
                       ? "assets/images/farmer_back.jpg"
                       : "assets/images/rubber_back.jpg",

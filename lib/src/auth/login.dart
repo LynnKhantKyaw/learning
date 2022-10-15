@@ -4,6 +4,7 @@ import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning/data/response/auth_response.dart';
+import 'package:learning/src/auth/forgot_password_type.dart';
 import 'package:learning/src/auth/register_name.dart';
 import 'package:learning/src/main_map/main_map1.dart';
 import 'package:learning/tool_widgets.dart';
@@ -263,23 +264,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   left: MediaQuery.of(context).size.width * 0.15,
                   top: MediaQuery.of(context).size.width * 0.28,
                 ),
-                child: Container(
-                  decoration: shadowDecorationWithBorderColor(
-                      const Color.fromARGB(200, 113, 101, 45),
-                      const Color.fromARGB(180, 113, 101, 45),
-                      12),
-                  margin: const EdgeInsets.only(top: 60),
-                  width: MediaQuery.of(context).size.width * 0.28,
-                  height: 52,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12, top: 8),
-                    child: Text(
-                      "Forgot Password?\nလျှို့ဝှက်နံပါတ် မေ့နေလား?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        height: 1.2,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordTypeScreen()),
+                    );
+                  },
+                  child: Container(
+                    decoration: shadowDecorationWithBorderColor(
+                        const Color.fromARGB(200, 113, 101, 45),
+                        const Color.fromARGB(180, 113, 101, 45),
+                        12),
+                    margin: const EdgeInsets.only(top: 60),
+                    width: MediaQuery.of(context).size.width * 0.28,
+                    height: 52,
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 12, top: 8),
+                      child: Text(
+                        "Forgot Password?\nလျှို့ဝှက်နံပါတ် မေ့နေလား?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          height: 1.2,
+                        ),
                       ),
                     ),
                   ),

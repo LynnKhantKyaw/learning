@@ -57,7 +57,7 @@ class _LearningPage1State extends State<LearningPage1> {
         body: Stack(
           children: [
             BackgroundPage(
-              backImage: "assets/images/bg1.jpg",
+              backImage: "assets/images/agre_back.jpg",
             ),
             const SessionHeader(),
             Align(
