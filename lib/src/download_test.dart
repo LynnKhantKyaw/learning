@@ -32,7 +32,7 @@ class _DownloadTestState extends State<DownloadTest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Download"),
+        title: const Text("Download Test"),
       ),
       body: Center(
         child: Column(
