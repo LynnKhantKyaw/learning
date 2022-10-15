@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
-          initialRoute: LoginScreen.routeName,
+          initialRoute: DownloadTest.routeName,
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(
               settings: routeSettings,

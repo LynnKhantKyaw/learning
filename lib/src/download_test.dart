@@ -46,7 +46,7 @@ class _DownloadTestState extends State<DownloadTest> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: FileImage(File(
-                        "${downloadAssetsController.assetsDir}/dart.jpeg")),
+                        "${downloadAssetsController.assetsDir}/replicate/s1.png")),
                     fit: BoxFit.fitWidth,
                   ),
                 ),
@@ -58,7 +58,7 @@ class _DownloadTestState extends State<DownloadTest> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: FileImage(File(
-                        "${downloadAssetsController.assetsDir}/flutter.png")),
+                        "${downloadAssetsController.assetsDir}/replicate/s2.png")),
                     fit: BoxFit.fitWidth,
                   ),
                 ),
@@ -107,7 +107,9 @@ class _DownloadTestState extends State<DownloadTest> {
     try {
       await downloadAssetsController.startDownload(
         assetsUrl:
-            "https://github.com/edjostenes/download_assets/raw/master/assets.zip",
+            "https://wwf-contents.fra1.digitaloceanspaces.com/subject1/subject1/replicate.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=NUM5DZATAVUJ3V46HMZM%2F20221015%2Ffra1%2Fs3%2Faws4_request&X-Amz-Date=20221015T054538Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c18716966f5702128d2475d8b368936b6be6837adb23fbf64ecc588a30af9b80",
+        // assetsUrl:
+        //     "https://github.com/edjostenes/download_assets/raw/master/assets.zip",
         onProgress: (progressValue) {
           downloaded = false;
           setState(() {
