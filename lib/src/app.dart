@@ -12,6 +12,8 @@ import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({
     Key? key,
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          navigatorKey: navigatorKey,
           debugShowCheckedModeBanner: false,
           restorationScopeId: 'app',
           localizationsDelegates: const [

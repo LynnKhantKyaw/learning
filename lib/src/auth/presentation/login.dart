@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   duration: const Duration(milliseconds: 400),
                   scaleFactor: 1.5,
                   onPressed: () async {
-                    login(context, "sithuaung", "123456");
+                    login(context, "satwaihlaing", "barlarlar");
                   },
                   child: Stack(
                     children: [
@@ -314,14 +314,14 @@ class _LoginScreenState extends State<LoginScreen> {
     };
 
     log('https://wwf.360ed.com/api/login');
-    final response = await http.post(
-        Uri.parse('https://wwf.360ed.com/api/login'),
-        headers: headers,
-        body: jsonEncode(<String, String>{
-          'username': name,
-          'password': password,
-          'device_token': 'test'
-        }));
+    final response =
+        await http.post(Uri.parse('https://wwf.360ed.com/api/login'),
+            headers: headers,
+            body: jsonEncode(<String, String>{
+              'username': name,
+              'password': password,
+              'device_token': 'erferferferferferferferfe'
+            }));
     log(jsonEncode(<String, String>{
       'username': name,
       'password': password,
@@ -346,10 +346,12 @@ class _LoginScreenState extends State<LoginScreen> {
       prefs.setString("updated_at", data.user!.updatedAt!.toString());
       prefs.setString("created_at", data.user!.createdAt!.toString());
       prefs.setString("s_id", data.user!.sId!.toString());
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const MainMapFirstScreen()),
-      );
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MainMapFirstScreen()),
+        );
+      }
     }
   }
 }

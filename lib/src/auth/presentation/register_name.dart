@@ -3,26 +3,29 @@ import 'dart:developer';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning/data/response/auth_response.dart';
+import 'package:learning/src/auth/controller/auth_controller.dart';
 import 'package:learning/src/main_map/main_map1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RegisterNameScreen extends StatefulWidget {
+class RegisterNameScreen extends ConsumerStatefulWidget {
   static const routeName = '/register_name';
   const RegisterNameScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterNameScreen> createState() => _RegisterNameScreenState();
+  ConsumerState<RegisterNameScreen> createState() => _RegisterNameScreenState();
 }
 
-class _RegisterNameScreenState extends State<RegisterNameScreen> {
+class _RegisterNameScreenState extends ConsumerState<RegisterNameScreen> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final professionalController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   String? stateSelected;
   String? categorySelected;
   bool isTerAndConditionAggress = false;
@@ -64,18 +67,18 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
   ];
   List<String> monthList = [
     //in short terms
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
+    'January',
+    'February',
+    'March',
+    'April',
     'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
   ];
   List<String> yearList = [
     //from 1900 to 2022 in one suggestion
@@ -230,6 +233,7 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
     return MediaQuery(
       data: mqDataNew,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -306,361 +310,572 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.28,
-                    right: MediaQuery.of(context).size.width * 0.28,
+                    left: MediaQuery.of(context).size.width * 0.26,
+                    right: MediaQuery.of(context).size.width * 0.26,
                     top: MediaQuery.of(context).size.width * 0.14,
                     bottom: MediaQuery.of(context).size.height * 0.15),
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        height: 1.0,
-                        color: Colors.black,
-                      ),
-                      controller: userNameController,
-                      decoration: InputDecoration(
-                        labelText: "User Name/အသုံးပြုသူအမည်",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
-                        contentPadding:
-                            const EdgeInsets.only(left: 20, right: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      const Text(
+                        'User Name/အသုံးပြုသူအမည်',
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: 0, right: 0, top: 12, bottom: 12),
-                      child: DropdownButtonFormField2(
-                        decoration: InputDecoration(
-                          isDense: true,
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.text,
+                        style: const TextStyle(
+                          height: 1.0,
+                          color: Colors.black,
+                        ),
+                        controller: userNameController,
+                        decoration: const InputDecoration(
+                          hintText: "User Name/အသုံးပြုသူအမည်",
                           fillColor: Colors.white,
                           filled: true,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                          hintStyle:
+                              TextStyle(fontSize: 15, color: Colors.grey),
+                          contentPadding: EdgeInsets.only(left: 20, right: 20),
+                          border: InputBorder.none,
                         ),
-                        isExpanded: true,
-                        hint: const Text(
-                          "State/Region/ နေထိုင်ရာဒေသ",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black45,
-                        ),
-                        iconSize: 30,
-                        buttonHeight: 48,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
-                        dropdownDecoration: BoxDecoration(
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Date Of Birth / မွေးသက္ကရာဇ်',
+                        style: TextStyle(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        items: stateItems
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return "Please Select State/Region";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            stateSelected = value.toString();
-                          });
-                        },
-                        onSaved: (value) {
-                          setState(() {
-                            stateSelected = value.toString();
-                          });
-                        },
-                      ),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        height: 1.0,
-                        color: Colors.black,
-                      ),
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        labelText: "Email/အီးမေးလ်",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
-                        contentPadding:
-                            const EdgeInsets.only(left: 20, right: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        height: 1.0,
-                        color: Colors.black,
-                      ),
-                      controller: phoneController,
-                      decoration: InputDecoration(
-                        labelText: "Phone/ဖုန်းနံပါတ်",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
-                        contentPadding:
-                            const EdgeInsets.only(left: 20, right: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: 0, right: 0, top: 12, bottom: 12),
-                      child: DropdownButtonFormField2(
-                        decoration: InputDecoration(
-                          isDense: true,
-                          fillColor: Colors.white,
-                          filled: true,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        isExpanded: true,
-                        hint: const Text(
-                          "Category/ အမျိုးအစား",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black45,
-                        ),
-                        iconSize: 30,
-                        buttonHeight: 48,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
-                        dropdownDecoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        items: categoryItems
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return "Please Select Category";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            categorySelected = value.toString();
-                          });
-                        },
-                        onSaved: (value) {
-                          setState(() {
-                            categorySelected = value.toString();
-                          });
-                        },
-                      ),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        height: 1.0,
-                        color: Colors.black,
-                      ),
-                      controller: professionalController,
-                      decoration: InputDecoration(
-                        labelText: "Professional/အသက်မွေးဝမ်းကျောင်းအလုပ်",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
-                        contentPadding:
-                            const EdgeInsets.only(left: 20, right: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        height: 1.0,
-                        color: Colors.black,
-                      ),
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        labelText: "Password/လျှို့ဝှက်နံပါတ်",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
-                        contentPadding:
-                            const EdgeInsets.only(left: 20, right: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: const TextStyle(
-                        height: 1.0,
-                        color: Colors.black,
-                      ),
-                      controller: confirmPasswordController,
-                      decoration: InputDecoration(
-                        labelText: "Confirm Password/လျှို့ဝှက်နံပါတ်",
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Colors.grey),
-                        contentPadding:
-                            const EdgeInsets.only(left: 20, right: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Row(
+                      Row(
                         children: [
-                          Checkbox(
-                            value: isTerAndConditionAggress,
-                            onChanged: (value) {
-                              setState(() {
-                                isTerAndConditionAggress = value!;
-                              });
-                            },
-                            activeColor: Colors.green,
-                            checkColor: Colors.white,
-                            tristate: false,
+                          Expanded(
+                            child: DropdownButtonFormField2(
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                fillColor: Colors.white,
+                                filled: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              buttonDecoration: const BoxDecoration(
+                                borderRadius: BorderRadius.zero,
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                "1",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 48,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              items: dateList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              validator: (value) {
+                                if (value == null || value.toString().isEmpty) {
+                                  return "Please Select Birth Day";
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {},
+                              onSaved: (value) {},
+                            ),
                           ),
-                          const Text(
-                            " I agree to Privacy Policy of 360 ed",
-                            style: TextStyle(fontSize: 16),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            flex: 2,
+                            child: DropdownButtonFormField2(
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                fillColor: Colors.white,
+                                filled: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              buttonDecoration: const BoxDecoration(
+                                borderRadius: BorderRadius.zero,
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                "January",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 48,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              items: monthList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              validator: (value) {
+                                if (value == null || value.toString().isEmpty) {
+                                  return "Please Select Birth Month";
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {},
+                              onSaved: (value) {},
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            flex: 2,
+                            child: DropdownButtonFormField2(
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                fillColor: Colors.white,
+                                filled: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: InputBorder.none,
+                              ),
+                              buttonDecoration: const BoxDecoration(
+                                borderRadius: BorderRadius.zero,
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                "1999",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 48,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              items: yearList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              validator: (value) {
+                                if (value == null || value.toString().isEmpty) {
+                                  return "Please Select Birth Year";
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {},
+                              onSaved: (value) {},
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    BouncingWidget(
-                      duration: const Duration(milliseconds: 400),
-                      scaleFactor: 1.5,
-                      onPressed: () async {
-                        register(
-                            context,
-                            userNameController.text.toString(),
-                            passwordController.text.toString(),
-                            confirmPasswordController.text.toString(),
-                            emailController.text.toString(),
-                            phoneController.text.toString(),
-                            "dob",
-                            stateSelected.toString(),
-                            categorySelected.toString(),
-                            professionalController.text.toString());
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: Stack(
+                      const SizedBox(height: 12),
+                      const Text(
+                        'State/Region/ နေထိုင်ရာဒေသ',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                            left: 0, right: 0, top: 0, bottom: 0),
+                        child: DropdownButtonFormField2(
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: EdgeInsets.zero,
+                            border: InputBorder.none,
+                          ),
+                          buttonDecoration: const BoxDecoration(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                          isExpanded: true,
+                          hint: const Text(
+                            "State/Region/ နေထိုင်ရာဒေသ",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          icon: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 30,
+                          buttonHeight: 48,
+                          buttonPadding:
+                              const EdgeInsets.only(left: 20, right: 10),
+                          dropdownDecoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          items: stateItems
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          validator: (value) {
+                            if (value == null || value.toString().isEmpty) {
+                              return "Please Select State/Region";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              stateSelected = value.toString();
+                            });
+                          },
+                          onSaved: (value) {
+                            setState(() {
+                              stateSelected = value.toString();
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Email/အီးမေးလ်',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.text,
+                        style: const TextStyle(
+                          height: 1.0,
+                          color: Colors.black,
+                        ),
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                          hintText: "Email/အီးမေးလ်",
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintStyle:
+                              TextStyle(fontSize: 15, color: Colors.grey),
+                          contentPadding: EdgeInsets.only(left: 20, right: 20),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Phone/ဖုန်းနံပါတ်',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.text,
+                        style: const TextStyle(
+                          height: 1.0,
+                          color: Colors.black,
+                        ),
+                        controller: phoneController,
+                        decoration: const InputDecoration(
+                          hintText: "Phone/ဖုန်းနံပါတ်",
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintStyle:
+                              TextStyle(fontSize: 15, color: Colors.grey),
+                          contentPadding: EdgeInsets.only(left: 20, right: 20),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Category/ အမျိုးအစား',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                            left: 0, right: 0, top: 0, bottom: 0),
+                        child: DropdownButtonFormField2(
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: EdgeInsets.zero,
+                            border: InputBorder.none,
+                          ),
+                          isExpanded: true,
+                          hint: const Text(
+                            "Category/ အမျိုးအစား",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          icon: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 30,
+                          buttonHeight: 48,
+                          buttonPadding:
+                              const EdgeInsets.only(left: 20, right: 10),
+                          dropdownDecoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          items: categoryItems
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          validator: (value) {
+                            if (value == null || value.toString().isEmpty) {
+                              return "Please Select Category";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              categorySelected = value.toString();
+                            });
+                          },
+                          onSaved: (value) {
+                            setState(() {
+                              categorySelected = value.toString();
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Professional/အသက်မွေးဝမ်းကျောင်းအလုပ်',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return "Professinal/အသက်မွေး၀မ်ကျောင်းအလုပ် is Required";
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text,
+                        style: const TextStyle(
+                          height: 1.0,
+                          color: Colors.black,
+                        ),
+                        controller: professionalController,
+                        decoration: const InputDecoration(
+                          hintText: "Professional/အသက်မွေးဝမ်းကျောင်းအလုပ်",
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintStyle:
+                              TextStyle(fontSize: 15, color: Colors.grey),
+                          contentPadding: EdgeInsets.only(left: 20, right: 20),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      const Text(
+                        'Password/လျှို့ဝှက်နံပါတ်',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return "Password is Required";
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text,
+                        style: const TextStyle(
+                          height: 1.0,
+                          color: Colors.black,
+                        ),
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          hintText: "Password/လျှို့ဝှက်နံပါတ်",
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintStyle:
+                              TextStyle(fontSize: 15, color: Colors.grey),
+                          contentPadding: EdgeInsets.only(left: 20, right: 20),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      const Text(
+                        'Confirm Password/လျှို့ဝှက်နံပါတ်',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        validator: (value) {
+                          if (value == null || value.toString().isEmpty) {
+                            return "Password is Required";
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        keyboardType: TextInputType.text,
+                        style: const TextStyle(
+                          height: 1.0,
+                          color: Colors.black,
+                        ),
+                        controller: confirmPasswordController,
+                        decoration: const InputDecoration(
+                          hintText: "Confirm Password/လျှို့ဝှက်နံပါတ်",
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintStyle:
+                              TextStyle(fontSize: 15, color: Colors.grey),
+                          contentPadding: EdgeInsets.only(left: 20, right: 20),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Row(
                           children: [
-                            Image.asset(
-                              "assets/images/button_green.png",
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: 54,
-                              fit: BoxFit.fill,
+                            Checkbox(
+                              value: isTerAndConditionAggress,
+                              onChanged: (value) {
+                                setState(() {
+                                  isTerAndConditionAggress = value!;
+                                });
+                              },
+                              activeColor: Colors.green,
+                              checkColor: Colors.white,
+                              tristate: false,
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 32, top: 16),
-                              child: Text(
-                                "Create Account/အကောင့်သစ် ဖွင့်မယ်",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  height: 1.2,
-                                ),
-                              ),
+                            const Text(
+                              " I agree to Privacy Policy of 360 ed",
+                              style: TextStyle(fontSize: 16),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      BouncingWidget(
+                        duration: const Duration(milliseconds: 400),
+                        scaleFactor: 1.5,
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            // register(
+                            //     context,
+                            //     userNameController.text.toString(),
+                            //     passwordController.text.toString(),
+                            //     confirmPasswordController.text.toString(),
+                            //     emailController.text.toString(),
+                            //     phoneController.text.toString(),
+                            //     "dob",
+                            //     stateSelected.toString(),
+                            //     categorySelected.toString(),
+                            //     professionalController.text.toString());
+                            ref.read(authControllerProvider.notifier).register(
+                                  name: userNameController.text.toString(),
+                                  password: passwordController.text.toString(),
+                                  passwordConfirm:
+                                      confirmPasswordController.text.toString(),
+                                  email: emailController.text.toString(),
+                                  phone: phoneController.text.toString(),
+                                  dob: "dob",
+                                  state: stateSelected.toString(),
+                                  userType: categorySelected.toString(),
+                                  profession:
+                                      professionalController.text.toString(),
+                                );
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: Stack(
+                            children: [
+                              Image.asset(
+                                "assets/images/button_green.png",
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: 54,
+                                fit: BoxFit.fill,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 32, top: 16),
+                                child: Text(
+                                  "Create Account/အကောင့်သစ် ဖွင့်မယ်",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    height: 1.2,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -668,74 +883,5 @@ class _RegisterNameScreenState extends State<RegisterNameScreen> {
         ),
       ),
     );
-  }
-
-  register(
-      BuildContext context,
-      String name,
-      String password,
-      String passwordConfirm,
-      String email,
-      String phone,
-      String dob,
-      String state,
-      String userType,
-      String profession) async {
-    Map<String, String> headers = {
-      "Accept": "application/json",
-      'content-type': 'application/json',
-    };
-
-    log('https://wwf.360ed.com/api/login');
-    final response =
-        await http.post(Uri.parse('https://wwf.360ed.com/api/login'),
-            headers: headers,
-            body: jsonEncode(<String, String>{
-              'username': name,
-              'password': password,
-              'password_confirmation': passwordConfirm,
-              'email': email,
-              'phone': phone,
-              'dob': dob,
-              'state': state,
-              'user_type': userType,
-              'profession': profession,
-              'device_token': 'test'
-            }));
-    log(jsonEncode(<String, String>{
-      'username': name,
-      'password': password,
-      'password_confirmation': passwordConfirm,
-      'email': email,
-      'phone': phone,
-      'dob': dob,
-      'state': state,
-      'user_type': userType,
-      'profession': profession,
-    }));
-    print(response.statusCode);
-    log(response.body);
-    if (response.statusCode == 200) {
-      AuthResponse data = AuthResponse.fromJson(jsonDecode(response.body));
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("token", data.apiToken.toString());
-      prefs.setString("name", data.user!.userName!.toString());
-      prefs.setString("age", data.user!.age!.toString());
-      prefs.setString("phone", data.user!.phone!.toString());
-      prefs.setString("email", data.user!.email!.toString());
-      prefs.setString("profession", data.user!.profession!.toString());
-
-      prefs.setString("user_type", data.user!.userType!.toString());
-      prefs.setString("last_login", data.user!.lastLogin!.toString());
-      prefs.setString(
-          "is_email_verified", data.user!.isEmailVerified!.toString());
-      prefs.setString("updated_at", data.user!.updatedAt!.toString());
-      prefs.setString("created_at", data.user!.createdAt!.toString());
-      prefs.setString("s_id", data.user!.sId!.toString());
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const MainMapFirstScreen()),
-      );
-    }
   }
 }
