@@ -4,8 +4,8 @@ import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning/data/response/auth_response.dart';
-import 'package:learning/src/auth/forgot_password_type.dart';
-import 'package:learning/src/auth/register_name.dart';
+import 'package:learning/src/auth/presentation/forgot_password_type.dart';
+import 'package:learning/src/auth/presentation/register_name.dart';
 import 'package:learning/src/main_map/main_map1.dart';
 import 'package:learning/tool_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return MediaQuery(
       data: mqDataNew,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -187,12 +188,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     maxLength: 11,
-                    style: const TextStyle(
-                      height: 1.0,
-                      color: Colors.black,
-                    ),
+                    // style: const TextStyle(
+                    //   height: 1.0,
+                    //   color: Colors.black,
+                    // ),
                     controller: userNameController,
                     decoration: const InputDecoration(
+                      isDense: true,
                       labelText: "User Name/အသုံးပြုသူအမည်",
                       labelStyle: TextStyle(color: Colors.black),
                       counterText: "",
@@ -200,6 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 5),
               Padding(
                 padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * 0.16,
@@ -217,6 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     controller: passwordController,
                     decoration: const InputDecoration(
+                      isDense: true,
                       labelText: "Password/လျှို့ဝှက်နံပါတ်",
                       labelStyle: TextStyle(color: Colors.black),
                       counterText: "",
@@ -269,7 +273,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordTypeScreen()),
+                          builder: (context) =>
+                              const ForgotPasswordTypeScreen()),
                     );
                   },
                   child: Container(
@@ -322,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
       'password': password,
       'device_token': 'test'
     }));
-    print(response.statusCode);
+    log(response.statusCode.toString());
     log(response.body);
     if (response.statusCode == 200) {
       AuthResponse data = AuthResponse.fromJson(jsonDecode(response.body));

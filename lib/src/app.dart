@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:learning/src/auth/login.dart';
+import 'package:learning/src/auth/presentation/login.dart';
 import 'package:learning/src/download_test.dart';
 import 'package:learning/src/interactive/soil_page.dart';
 import 'package:learning/src/main_map/main_map1.dart';
@@ -52,15 +52,15 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               color: Colors.red[800],
             ),
-            textTheme: const TextTheme(
-              headline1: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              headline6: TextStyle(
-                fontSize: 18.0,
-              ),
-              bodyText2: TextStyle(
-                fontSize: 14.0,
-              ),
-            ),
+            // textTheme: const TextTheme(
+            //   headline1: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            //   headline6: TextStyle(
+            //     fontSize: 16.0,
+            //   ),
+            //   bodyText2: TextStyle(
+            //     fontSize: 14.0,
+            //   ),
+            // ),
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
